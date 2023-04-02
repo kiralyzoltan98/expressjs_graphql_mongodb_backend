@@ -1,6 +1,8 @@
 require('dotenv').config()
 const express = require('express')
 const app = express()
+const cors = require('cors');
+app.use(cors());
 const expressGraphQL = require('express-graphql').graphqlHTTP
 
 const mongoose = require('mongoose')
@@ -138,7 +140,7 @@ const schema = new GraphQLSchema({
     mutation: RootMutationType
 })
 
-app.use('/graphql', expressGraphQL({
+app.use('/graphql', cors(), expressGraphQL({
     schema: schema,
     graphiql: true
 }))
